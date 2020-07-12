@@ -28,12 +28,9 @@ public class Lab2_3 {
      */
 	public void logTransformation(Img i) {
 		//Your code here
-		double c = 255 / Math.log(256);
-		for (int y=0; y < i.width; ++y) {
-			for (int x = 0; x < i.height; ++x) {
-				int r = (int) (i.img[x * i.width + y] & 0xFF);
-				i.img[x * i.width + y] = (byte)(c * Math.log(1 + r));
-			}
+		double c = 255.0 / Math.log(256);
+		for (int x = 0; x < i.img.length; ++x) {
+			i.img[x] = (byte)(c * Math.log(1 + (i.img[x] & 0xFF)));
 		}
 	}
 		

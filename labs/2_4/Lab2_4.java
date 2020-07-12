@@ -43,11 +43,8 @@ public class Lab2_4 {
     public void bitPlaneSlicing(Img i, int mask) {
         //Your code here
         double c = 255.0 / mask; // rescale with c
-        for (int y = 0; y < i.width; ++y) {
-            for (int x = 0; x < i.height; ++x) {
-                int v = (int) (i.img[x * i.width + y] & 0xFF);
-                i.img[x * i.width + y] = (byte)(c * (v  & mask));
-            }
+        for (int x = 0; x < i.img.length; ++x) {
+            i.img[x] = (byte)(c * ((i.img[x] & 0xFF) & mask));
         }
     }
 

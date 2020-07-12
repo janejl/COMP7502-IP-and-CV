@@ -27,14 +27,12 @@ public class Lab2_1 {
      */
 	public void thresholdTransformation(Img i, int threshold) {
 		//Your code here
-		for (int y=0; y < i.width; ++y) {
-			for (int x=0; x < i.height; ++x) {
-				int v = (int)(i.img[x*i.width+y] & 0xFF);
-				if (v < threshold) {
-					i.img[x*i.width+y] = (byte) 0;
-				} else {
-					i.img[x*i.width+y] = (byte) 255;
-				}
+		for (int x=0; x < i.img.length; ++x) {
+			int v = (int)(i.img[x] & 0xFF);
+			if (v < threshold) {
+				i.img[x] = (byte) 0;
+			} else {
+				i.img[x] = (byte) 255;
 			}
 		}
 	}

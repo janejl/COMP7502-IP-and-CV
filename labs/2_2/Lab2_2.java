@@ -24,11 +24,8 @@ public class Lab2_2 {
      */
 	public void negativeTransformation(Img i) {
 		//Your code here
-		for (int y=0; y < i.width; ++y) {
-			for (int x = 0; x < i.height; ++x) {
-				int v = (int) (i.img[x * i.width + y] & 0xFF);
-				i.img[x * i.width + y] = (byte)(255 - v);
-			}
+		for (int x = 0; x < i.img.length; ++x) {
+			i.img[x] = (byte)(255 - (i.img[x] & 0xFF));
 		}
 	}
 		
