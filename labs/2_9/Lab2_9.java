@@ -38,15 +38,15 @@ public class Lab2_9 {
         System.arraycopy(i.img, 0, imgCopy, 0, i.img.length);
         for (int x = a; x < i.height - a; x++) {
             for (int y = a; y < i.width - a; y++) {
-                byte[] values = new byte[size * size];
+                int[] values = new int[size * size];
                 int index = 0;
                 for (int fx = -a; fx <= a; fx++) {
                     for (int fy = -a; fy <= a; fy++) {
-                        values[index++] = imgCopy[(x + fx) * i.width + y + fy];
+                        values[index++] = (int) (imgCopy[(x + fx) * i.width + y + fy] & 0xFF);
                     }
                 }
                 Arrays.sort(values);
-                i.img[x * i.width + y] = values[size * size / 2];
+                i.img[x * i.width + y] = (byte) values[size * size / 2];
             }
         }
     }
