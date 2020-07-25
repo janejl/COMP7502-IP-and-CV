@@ -39,9 +39,8 @@ public class Lab3_1 {
                 F[u * i.width + v] = new Complex();
                 for (int x = 0; x < i.height; x++) {
                     for (int y = 0; y < i.width; y++) {
-                        double f = (double) (i.img[x * i.width + y] & 0xFF);
-//                        double f = (double) (i.img[x * i.width + y] & 0xFF) * Math.pow(-1, x+y); // center the spectrum
-                        double theta = -2 * Math.PI * (u * x / (double) i.height) + (v * y / (double) i.width);
+                        double f = (double) (i.img[x * i.width + y] & 0xFF) * Math.pow(-1, x + y);
+                        double theta = -2 * Math.PI * (u * x / (double) i.height + v * y / (double) i.width);
                         F[u * i.width + v].plus(new Complex(Math.cos(theta) * f, Math.sin(theta) * f));
                     }
                 }

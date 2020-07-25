@@ -33,19 +33,14 @@ public class Lab3_2 {
 
     public Complex[] fourierTransfrom(Img i) {
         //Change this to your code from 3_1
-//    	Complex[] F = new Complex[i.width*i.height];
-//		for (int x=0;x<i.img.length;x++)
-//			F[x] = new Complex();
-//		return F;
         Complex[] F = new Complex[i.width * i.height];
         for (int u = 0; u < i.height; u++) {
             for (int v = 0; v < i.width; v++) {
                 F[u * i.width + v] = new Complex();
                 for (int x = 0; x < i.height; x++) {
                     for (int y = 0; y < i.width; y++) {
-//                        double f = (double) (i.img[x * i.width + y] & 0xFF);
-                        double f = (double) (i.img[x * i.width + y] & 0xFF) * Math.pow(-1, x + y); // center the spectrum
-                        double theta = -2 * Math.PI * (u * x / (double) i.height) + (v * y / (double) i.width);
+                        double f = (double) (i.img[x * i.width + y] & 0xFF) * Math.pow(-1, x + y);
+                        double theta = -2 * Math.PI * (u * x / (double) i.height + v * y / (double) i.width);
                         F[u * i.width + v].plus(new Complex(Math.cos(theta) * f, Math.sin(theta) * f));
                     }
                 }
@@ -62,7 +57,7 @@ public class Lab3_2 {
                 Complex c = new Complex();
                 for (int u = 0; u < i.height; u++) {
                     for (int v = 0; v < i.width; v++) {
-                        double theta = 2 * Math.PI * (u * x / (double) i.height) + (v * y / (double) i.width);
+                        double theta = 2 * Math.PI * (u * x / (double) i.height + v * y / (double) i.width);
                         Complex e = new Complex(Math.cos(theta), Math.sin(theta));
                         e.mul(F[u * i.width + v]);
                         c.plus(e);
