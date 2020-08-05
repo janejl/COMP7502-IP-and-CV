@@ -56,7 +56,6 @@ public class P1_3 {
     }
 
     public double butterWorthNorthFilter(int M, int N, int u, int v, int center_x, int center_y, double D0, int n) {
-        double D = Math.sqrt(Math.pow(u - center_x, 2) + Math.pow(v - center_y, 2));
         double Dk = Math.sqrt(Math.pow(u - M / 2 - center_x, 2) + Math.pow(v - N / 2 - center_y, 2));
         double D_k = Math.sqrt(Math.pow(u - M / 2 + center_x, 2) + Math.pow(v - N / 2 + center_y, 2));
         double H = (1 + Math.pow(D0 / Dk, n)) * (1 + Math.pow(D0 / D_k, n));
