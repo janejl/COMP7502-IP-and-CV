@@ -16,6 +16,7 @@ public class P2_1 {
 
 	public void gradientImage(Img i) {
 		//Your code here
+		// 2 1-d gaussian smoothing
 	}
 
 	public static void main(String[] args) {

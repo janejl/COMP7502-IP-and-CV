@@ -84,7 +84,7 @@ public class P1_2 {
                 f.div(i.width * i.height);
                 f.mul(Math.pow(-1, x + y));
                 if (f.r < 0) f.r = 0;
-		if (f.r > 255) f.r = 255;
+                if (f.r > 255) f.r = 255;
                 i.img[x * i.width + y] = (byte) f.r;
             }
         }
