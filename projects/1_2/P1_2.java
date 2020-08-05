@@ -37,7 +37,7 @@ public class P1_2 {
         for (int u = 0; u < i.height; u++) {
             for (int v = 0; v < i.width; v++) {
                 double D = Math.sqrt(Math.pow(u - origin_x, 2) + Math.pow(v - origin_y, 2));
-                double H = 1 / (1 + Math.pow(D / d0, 2));
+                double H = 1 / (1 + Math.pow(D / d0, 4));
                 F[u * i.width + v].mul(H);
             }
         }
@@ -84,6 +84,7 @@ public class P1_2 {
                 f.div(i.width * i.height);
                 f.mul(Math.pow(-1, x + y));
                 if (f.r < 0) f.r = 0;
+		if (f.r > 255) f.r = 255;
                 i.img[x * i.width + y] = (byte) f.r;
             }
         }
