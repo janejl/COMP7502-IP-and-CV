@@ -10,6 +10,7 @@
  **/
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class P2_4 {
     public P2_4() {
