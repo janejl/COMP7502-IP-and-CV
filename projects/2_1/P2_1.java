@@ -24,13 +24,10 @@ public class P2_1 {
         int[] mask = new int[]{-1, 0, 1};
         for (int x = a; x < i.height - a; x++) {
             for (int y = a; y < i.width - a; y++) {
-                int fx = 0;
+                int fx = 0, fy = 0;
                 for (int s = -a; s <= a; s++) {
                     fx += (int) (imgCopy[(x - s) * i.width + y] & 0xFF) * mask[a - s];
-                }
-                int fy = 0;
-                for (int v = -a; v <= a; v++) {
-                    fy += (int) (imgCopy[x * i.width + y - v] & 0xFF) * mask[a - v];
+                    fy += (int) (imgCopy[x * i.width + y - s] & 0xFF) * mask[a - s];
                 }
                 i.img[x * i.width + y] = (byte) (Math.sqrt(fx * fx + fy * fy) / Math.sqrt(2));
             }
