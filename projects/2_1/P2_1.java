@@ -20,6 +20,7 @@ public class P2_1 {
         byte[] imgCopy = new byte[i.img.length];
         System.arraycopy(i.img, 0, imgCopy, 0, i.img.length);
 
+        double scale = 1 / Math.sqrt(2);
         int a = 1;
         int[] mask = new int[]{-1, 0, 1};
         for (int x = a; x < i.height - a; x++) {
@@ -29,7 +30,7 @@ public class P2_1 {
                     fx += (int) (imgCopy[(x - s) * i.width + y] & 0xFF) * mask[a - s];
                     fy += (int) (imgCopy[x * i.width + y - s] & 0xFF) * mask[a - s];
                 }
-                i.img[x * i.width + y] = (byte) (Math.sqrt(fx * fx + fy * fy) / Math.sqrt(2));
+                i.img[x * i.width + y] = (byte) (Math.sqrt(fx * fx + fy * fy) * scale);
             }
         }
     }

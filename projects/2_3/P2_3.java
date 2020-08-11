@@ -49,8 +49,8 @@ public class P2_3 {
 
         // 3. form an image of R using the smoothed images of derivatives, R = det(A) - k * Trace(A) ^ 2
         double k = 0.04;
-        for (int x = 0; x < i.height; ++x) {
-            for (int y = 0; y < i.width; ++y) {
+        for (int x = 0; x < i.height; x++) {
+            for (int y = 0; y < i.width; y++) {
                 int v = x * i.width + y;
                 double R = (fxfx[v] * fyfy[v] - fxfy[v] * fxfy[v]) - k * Math.pow(fxfx[v] + fyfy[v], 2);
                 i.img[x * i.width + y] = (R > threshold) ? (byte) 255 : (byte) 0;
@@ -64,21 +64,21 @@ public class P2_3 {
         int size = 1 + 2 * half;
         double[] mask = new double[size];
         double mask_sum = 0;
-        for (int k = 0; k <= half; ++k) {
+        for (int k = 0; k <= half; k++) {
             double value = Math.exp(-1 * k * k / (2 * sigma * sigma)) / (sigma * Math.sqrt(2 * Math.PI));
             mask_sum += (k == 0) ? value : value * 2;
             mask[half + k] = value;
             mask[half - k] = value;
         }
         // normalize the mask
-        for (int k = 0; k < size; ++k) {
+        for (int k = 0; k < size; k++) {
             mask[k] = mask[k] / mask_sum;
         }
 
         // 2D convolution using 1D mask in x
         double[] i_temp = new double[img.length];
-        for (int x = half; x < height - half; ++x) {
-            for (int y = half; y < width - half; ++y) {
+        for (int x = half; x < height - half; x++) {
+            for (int y = half; y < width - half; y++) {
                 for (int s = -half; s <= half; s++) {
                     i_temp[x * width + y] += img[(x - s) * width + y] * mask[half - s];
                 }
@@ -86,8 +86,8 @@ public class P2_3 {
         }
 
         // 2D convolution using 1D mask in y
-        for (int x = half; x < height - half; ++x) {
-            for (int y = half; y < width - half; ++y) {
+        for (int x = half; x < height - half; x++) {
+            for (int y = half; y < width - half; y++) {
                 double f = 0;
                 for (int s = -half; s <= half; s++) {
                     f += i_temp[x * width + y - s] * mask[half - s];

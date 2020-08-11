@@ -42,22 +42,26 @@ public class P2_2 {
         System.out.printf("Size: %d\n", size);
         double[] mask = new double[size];
         double mask_sum = 0;
-        for (int k = 0; k <= half; ++k) {
+        for (int k = 0; k <= half; k++) {
             double value = Math.exp(-1 * k * k / (2 * sigma * sigma)) / (sigma * Math.sqrt(2 * Math.PI));
             mask_sum += (k == 0) ? value : value * 2;
             mask[half + k] = value;
             mask[half - k] = value;
         }
         // normalize the mask
-        for (int k = 0; k < size; ++k) {
+        for (int k = 0; k < size; k++) {
             mask[k] = mask[k] / mask_sum;
         }
         System.out.printf("Mask: %s\n", Arrays.toString(mask));
 
         // 2D convolution using 1D mask in x
         double[] i_temp = new double[i.img.length];
-        for (int x = half; x < i.height - half; ++x) {
-            for (int y = half; y < i.width - half; ++y) {
+        for (int x = 0; x < i.img.length; x++) {
+            i_temp[x] = (double) (i.img[x] & 0xFF);
+        }
+        for (int x = half; x < i.height - half; x++) {
+            for (int y = half; y < i.width - half; y++) {
+                i_temp[x * i.width + y] = 0;
                 for (int s = -half; s <= half; s++) {
                     i_temp[x * i.width + y] += (double) (i.img[(x - s) * i.width + y] & 0xFF) * mask[half - s];
                 }
@@ -65,8 +69,8 @@ public class P2_2 {
         }
 
         // 2D convolution using 1D mask in y
-        for (int x = half; x < i.height - half; ++x) {
-            for (int y = half; y < i.width - half; ++y) {
+        for (int x = half; x < i.height - half; x++) {
+            for (int y = half; y < i.width - half; y++) {
                 double f = 0;
                 for (int s = -half; s <= half; s++) {
                     f += i_temp[x * i.width + y - s] * mask[half - s];
