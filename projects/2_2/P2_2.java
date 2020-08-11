@@ -43,7 +43,7 @@ public class P2_2 {
         double[] mask = new double[size];
         double mask_sum = 0;
         for (int k = 0; k <= half; k++) {
-            double value = Math.exp(-1 * k * k / (2 * sigma * sigma)) / (sigma * Math.sqrt(2 * Math.PI));
+            double value = Math.exp(-k * k / (2 * sigma * sigma)) / (sigma * Math.sqrt(2 * Math.PI));
             mask_sum += (k == 0) ? value : value * 2;
             mask[half + k] = value;
             mask[half - k] = value;
@@ -63,7 +63,7 @@ public class P2_2 {
             for (int y = half; y < i.width - half; y++) {
                 i_temp[x * i.width + y] = 0;
                 for (int s = -half; s <= half; s++) {
-                    i_temp[x * i.width + y] += (double) (i.img[(x - s) * i.width + y] & 0xFF) * mask[half - s];
+                    i_temp[x * i.width + y] += (double) (i.img[(x + s) * i.width + y] & 0xFF) * mask[half - s];
                 }
             }
         }
@@ -73,7 +73,7 @@ public class P2_2 {
             for (int y = half; y < i.width - half; y++) {
                 double f = 0;
                 for (int s = -half; s <= half; s++) {
-                    f += i_temp[x * i.width + y - s] * mask[half - s];
+                    f += i_temp[x * i.width + y + s] * mask[half - s];
                 }
                 i.img[x * i.width + y] = (byte) f;
             }
